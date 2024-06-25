@@ -1,5 +1,6 @@
 import Role from '../models/Role.js';
 import { CreateSuccess } from '../utils/success.js';
+import { CreateError } from '../utils/error.js';
 
 export const createRole = async (req, res, next) => {
     try {
@@ -25,21 +26,21 @@ export const updateRole = async (req, res, next) => {
 
         if (role) {
             const role = await Role.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
-            return res.status(200).send('Role updated');
+            return next(CreateSuccess(200, 'Role Updated!'))
         } else {
-            return res.status(404).send('Role not found')
+            return next(CreateError(404, 'Role Not Found '));
         }
     } catch (error) {
-        return res.status(500).send('Internal server error')
+        return next(CreateError(500, 'Internal Server Error'));
     }
 };
 
 export const getAllRoles = async (req, res, next) => {
     try {
         const roles = await Role.find({});
-        return res.status(200).send(roles);
+        return next(CreateSuccess(200, 'Roles found!'))
     } catch (error) {
-
+        return next(CreateError(500, 'Internal Server Error'));
     }
 };
 
@@ -48,12 +49,11 @@ export const deleteRole = async (req, res, next) => {
         const role = await Role.findById({_id: req.params.id});
         if (role) {
             await Role.findByIdAndDelete(req.params.id);         
-            return res.status(200).send('Role deleted');
+            return next(CreateSuccess(200, 'Role deleted!'))
         } else {
-            return res.status(404).send('Role not found')
+            return next(CreateError(404, 'Role Not Found '));
         }
-
     } catch (error) {
-        return res.status(500).send('Internal server error')
+        return next(CreateError(500, 'Internal Server Error'));
     }
 }
