@@ -1,4 +1,3 @@
-import e from "express";
 import express from "express";
 import mongoose from 'mongoose';
 import roleRoute from './routes/role.js'
@@ -24,7 +23,7 @@ const connectDB = async () => {
     }
 };
 
-app.listen(8800, () => {
+app.listen(8801, () => {
     connectDB();
     console.log("Connected to backend")
 });
