@@ -58,3 +58,24 @@ export const login = async (req, res, next) => {
         res.status(500).send('Something went wrong');
     }
 }
+
+export const registerAdmin = async (req, res, next) => {
+
+    const role = await Role.find({ role: 'User'});
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt);
+    
+    const newUser = new User({
+        username: req.body.username,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: hashPassword,
+        role: role,
+        isAdmin: true
+    });
+
+    await newUser.save();
+    return next(CreateSuccess(201, 'Admin Registered Successfully'));
+    //return res.status(200).send('User Registered Successfully!');
+};
