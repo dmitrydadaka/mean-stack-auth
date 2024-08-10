@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import roleRoute from './routes/role.js'
 import authRoute from "./routes/auth.js";
 import userRoute from './routes/user.js';
+import cookieParser from 'cookie-parser';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -10,6 +11,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());   
 app.use('/api/role', roleRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
