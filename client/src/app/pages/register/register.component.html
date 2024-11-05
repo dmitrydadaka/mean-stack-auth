@@ -1,31 +1,31 @@
 <div class="lg:w-3/12 mt-20 p-10 shadow-lg mx-auto">
   <h3 class="text-3xl text-center font-semibold py-5">Register</h3>
-  <form class="flex flex-col">
+  <form [formGroup]="registerForm" class="flex flex-col">
     <div class="flex flex-col mt-4 mb-1">
-      <input class="p-2 border border-gray-300 rounded" type="text" placeholder="FirstName">
+      <input formControlName="firstName" class="p-2 border border-gray-300 rounded" type="text" placeholder="FirstName">
       <span class="text-red-500">*FirstName is required</span>
     </div>
     <div class="flex flex-col mt-4 mb-1">
-      <input class="p-2 border border-gray-300 rounded" type="text" placeholder="LastName">
+      <input formControlName="lastName" class="p-2 border border-gray-300 rounded" type="text" placeholder="LastName">
       <span class="text-red-500">*LastName is required</span>
     </div>
     <div class="flex flex-col mt-4 mb-1">
-      <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Email">
+      <input formControlName="email" class="p-2 border border-gray-300 rounded" type="text" placeholder="Email">
       <span class="text-red-500">*Email is required</span>
     </div>
     <div class="flex flex-col mt-4 mb-1">
-      <input class="p-2 border border-gray-300 rounded" type="text" placeholder="UserName">
+      <input formControlName="userName" class="p-2 border border-gray-300 rounded" type="text" placeholder="UserName">
       <span class="text-red-500">*UserName is required</span>
     </div>
     <div class="flex flex-col mt-4 mb-1">
-      <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Password">
+      <input formControlName="password" class="p-2 border border-gray-300 rounded" type="text" placeholder="Password">
       <span class="text-red-500">*Password is required</span>
     </div>
     <div class="flex flex-col mt-4 mb-1">
-      <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Confirm Password">
+      <input formControlName="confirmPassword" class="p-2 border border-gray-300 rounded" type="text" placeholder="Confirm Password">
       <span class="text-red-500">*Confirm Password is required</span>
     </div>
-    <button class="bg-indigo-500 p-2 rounded mt-3 text-white">Submit</button>
+    <button [disabled]="true" (click)="register()" class="bg-indigo-500 p-2 rounded mt-3 text-white">Submit</button>
     <div class="flex justify-content mt-5">
       <span>Already have account?</span><a class="text-indigo-600 ml-2 cursor-pointer">Login here</a>
     </div>
