@@ -4,6 +4,7 @@ import roleRoute from './routes/role.js'
 import authRoute from "./routes/auth.js";
 import userRoute from './routes/user.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -11,7 +12,11 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cookieParser());   
+app.use(cookieParser()); 
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+}));  
 app.use('/api/role', roleRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);

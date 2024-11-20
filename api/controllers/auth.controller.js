@@ -12,7 +12,7 @@ export const register = async (req, res, next) => {
     const hashPassword = await bcrypt.hash(req.body.password, salt);
     
     const newUser = new User({
-        username: req.body.username,
+        username: req.body.userName,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -22,7 +22,7 @@ export const register = async (req, res, next) => {
 
     await newUser.save();
     return next(CreateSuccess(201, 'User Registered Successfully'));
-    //return res.status(200).send('User Registered Successfully!');
+    //return res.status(200).json('User Registered Successfully!');
 };
 
 export const login = async (req, res, next) => {
@@ -55,7 +55,7 @@ export const login = async (req, res, next) => {
         });
         //next(CreateSuccess(201, 'Login Success!'));
     } catch (error) {
-        res.status(500).send('Something went wrong');
+        res.status(500).json('Something went wrong');
     }
 }
 
@@ -77,5 +77,5 @@ export const registerAdmin = async (req, res, next) => {
 
     await newUser.save();
     return next(CreateSuccess(201, 'Admin Registered Successfully'));
-    //return res.status(200).send('User Registered Successfully!');
+    //return res.status(200).json('User Registered Successfully!');
 };
