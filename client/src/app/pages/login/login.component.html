@@ -12,8 +12,9 @@
     </div>
     <button [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid" (click)="login()"
     class="bg-indigo-500 p-2 rounded mt-3 text-white">Login</button>
-    <div class="flex justify-content mt-5">
-      <span>New to BookMyBook</span><a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer">Register here</a>
+    <div class="flex justify-between mt-5">
+      <a routerLink="/forget-password" class="text-indigo-600 ml-2 cursor-pointer">Forget Password?</a>
+      <span>New User?</span><a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer">Create New Account</a>
     </div>
   </form>
 </div>
