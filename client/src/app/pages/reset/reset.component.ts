@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { confirmPasswordValidator } from '../../validators/confirm-password.validator';
 
@@ -12,7 +12,7 @@ import { confirmPasswordValidator } from '../../validators/confirm-password.vali
   styleUrl: './reset.component.scss'
 })
 export default class ResetComponent implements OnInit {
-  resetForm !: FormGroup;
+  resetForm!: FormGroup;
   fb = inject(FormBuilder);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
@@ -24,10 +24,10 @@ export default class ResetComponent implements OnInit {
       {
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required]
-      },
+      }  as AbstractControlOptions,
       {
         validator: confirmPasswordValidator('password', 'confirmPassword')
-      }
+      } as AbstractControlOptions
 
     );
 
@@ -39,7 +39,7 @@ export default class ResetComponent implements OnInit {
   }
 
   reset() {
-
+    console.log(this.resetForm.value);
   }
 
 }
