@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
 export default class ForgetPasswordComponent implements OnInit {
   forgetForm !: FormGroup;
   fb = inject(FormBuilder);
+  authService = inject(AuthService);
 
   ngOnInit(): void {
     this.forgetForm = this.fb.group({
@@ -24,6 +26,19 @@ export default class ForgetPasswordComponent implements OnInit {
 
   submit() {
     console.log(this.forgetForm.value);
+    this.authService.sendEmailService(this.forgetForm.value.email)
+      .subscribe(
+        {
+          next: (res) => {
+            alert(res.message);
+            this.forgetForm.reset();
+          },
+          error: (err) => {
+            alert(err.error.message);
+          }
+        }
+      );
+
   }
 
 }
